@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # 當發生錯誤時終止腳本運行
 set -e
 
@@ -6,6 +8,7 @@ npm run build
 
 # 移動至到打包後的 dist 目錄 
 cd dist
+
 git init
 git add -A
 git commit -m 'deploy'
