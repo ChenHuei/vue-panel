@@ -30,10 +30,13 @@ export default class HeaderItem extends Vue {
   disabledKey!: string;
 
   @Prop()
-  isDisabeldUndo!: boolean;
+  isDisabledSave!: boolean;
 
   @Prop()
-  isDisabeldRedo!: boolean;
+  isDisabledUndo!: boolean;
+
+  @Prop()
+  isDisabledRedo!: boolean;
 }
 </script>
 

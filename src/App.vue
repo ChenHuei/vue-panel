@@ -12,8 +12,9 @@
       @mouseenter="onMouseEnter"
     />
     <Header
-      :isDisabeldUndo="isDisabeldUndo"
-      :isDisabeldRedo="isDisabeldRedo"
+      :isDisabledSave="isDisabledSave"
+      :isDisabledUndo="isDisabledUndo"
+      :isDisabledRedo="isDisabledRedo"
       @save="saveHandler"
       @clear="clearHandler"
       @undo="undoHandler"
@@ -51,11 +52,15 @@ export default class App extends Vue {
   canvas: HTMLCanvasElement | null = null;
   context: CanvasRenderingContext2D | null = null;
 
-  get isDisabeldUndo(): boolean {
+  get isDisabledSave(): boolean {
+    return this.history.length === 0;
+  }
+
+  get isDisabledUndo(): boolean {
     return this.current === 0;
   }
 
-  get isDisabeldRedo(): boolean {
+  get isDisabledRedo(): boolean {
     return this.current === this.history.length;
   }
 
@@ -97,13 +102,13 @@ export default class App extends Vue {
   }
 
   undoHandler(): void {
-    if (this.isDisabeldUndo) return;
+    if (this.isDisabledUndo) return;
 
     this.changeHistoryHandler(-1);
   }
 
   redoHandler(): void {
-    if (this.isDisabeldRedo) return;
+    if (this.isDisabledRedo) return;
 
     this.changeHistoryHandler(1);
   }

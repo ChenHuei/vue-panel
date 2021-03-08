@@ -6,8 +6,9 @@
     <Item
       v-for="item in list"
       :key="item.event"
-      :isDisabeldUndo="isDisabeldUndo"
-      :isDisabeldRedo="isDisabeldRedo"
+      :isDisabledSave="isDisabledSave"
+      :isDisabledUndo="isDisabledUndo"
+      :isDisabledRedo="isDisabledRedo"
       v-bind="item"
       v-on="$listeners"
     />
@@ -43,10 +44,13 @@ import { HEADER_LIST } from "@/constants/header";
 })
 export default class Header extends Vue {
   @Prop()
-  isDisabeldUndo!: boolean;
+  isDisabledSave!: boolean;
 
   @Prop()
-  isDisabeldRedo!: boolean;
+  isDisabledUndo!: boolean;
+
+  @Prop()
+  isDisabledRedo!: boolean;
 
   isCollapse = false;
 
