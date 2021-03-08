@@ -1,29 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+  <main id="app" class="w-screen h-screen bg-gray-200">
+    <Header
+      @save="saveHandler"
+      @clear="clearHandler"
+      @undo="undoHandler"
+      @redo="redoHandler"
+    />
+  </main>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
+
+// components
+import Header from "@/components/Header.vue";
 
 @Component({
-  components: {
-    HelloWorld
-  }
+  components: { Header },
 })
-export default class App extends Vue {}
-</script>
+export default class App extends Vue {
+  saveHandler(): void {
+    console.log("saveHandler");
+  }
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  clearHandler(): void {
+    console.log("clearHandler");
+  }
+
+  undoHandler(): void {
+    console.log("undoHandler");
+  }
+
+  redoHandler(): void {
+    console.log("redoHandler");
+  }
 }
-</style>
+</script>
