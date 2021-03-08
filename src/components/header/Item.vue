@@ -1,6 +1,7 @@
 <template>
   <div
-    class="flex items-center mr-8 transition-opacity cursor-pointer hover:opacity-40"
+    class="header-item flex items-center mr-8 transition-opacity cursor-pointer hover:opacity-40"
+    :class="{ disabled: disabledKey ? this[disabledKey] : false }"
     @click="$emit(event)"
   >
     <i class="fas mr-2" :class="[`fa-${icon}`, size]"></i>
@@ -12,7 +13,7 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component
-export default class extends Vue {
+export default class HeaderItem extends Vue {
   @Prop()
   label!: string;
 
@@ -24,5 +25,27 @@ export default class extends Vue {
 
   @Prop()
   event!: string;
+
+  @Prop()
+  disabledKey!: string;
+
+  @Prop()
+  isDisabeldUndo!: boolean;
+
+  @Prop()
+  isDisabeldRedo!: boolean;
 }
 </script>
+
+<style lang="scss" scoped>
+.header-item {
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+
+    &:hover {
+      opacity: 0.4;
+    }
+  }
+}
+</style>

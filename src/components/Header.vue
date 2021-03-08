@@ -3,14 +3,14 @@
     class="header relative w-screen h-20 flex justify-center items-center bg-white transition-transform"
     :class="collapseClass"
   >
-    <!-- item -->
     <Item
       v-for="item in list"
       :key="item.event"
+      :isDisabeldUndo="isDisabeldUndo"
+      :isDisabeldRedo="isDisabeldRedo"
       v-bind="item"
       v-on="$listeners"
     />
-
     <!-- arrow -->
     <div
       class="header-collapse absolute left-1/2 top-full w-12 h-12 flex justify-center items-center bg-white rounded-full transition cursor-pointer"
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 // components
 import Item from "./header/Item.vue";
@@ -41,7 +41,13 @@ import { HEADER_LIST } from "@/constants/header";
     };
   },
 })
-export default class App extends Vue {
+export default class Header extends Vue {
+  @Prop()
+  isDisabeldUndo!: boolean;
+
+  @Prop()
+  isDisabeldRedo!: boolean;
+
   isCollapse = false;
 
   get collapseClass(): { [key: string]: boolean } {
