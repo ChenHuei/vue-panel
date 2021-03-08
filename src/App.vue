@@ -6,7 +6,7 @@
       width="0"
       height="0"
       @mousedown="onMouseDown"
-      @mouseup="onMouseup"
+      @mouseup="onMouseUp"
       @mousemove="onMouseMove"
       @mouseleave="onMouseLeave"
       @mouseenter="onMouseEnter"
@@ -97,21 +97,18 @@ export default class App extends Vue {
   }
 
   undoHandler(): void {
+    if (this.isDisabeldUndo) return;
+
     this.changeHistoryHandler(-1);
   }
 
   redoHandler(): void {
+    if (this.isDisabeldRedo) return;
+
     this.changeHistoryHandler(1);
   }
 
   changeHistoryHandler(step: 1 | -1): void {
-    if (
-      (step > 0 && this.current === this.history.length) ||
-      (step < 0 && this.current === 0)
-    ) {
-      return;
-    }
-
     if (this.context && this.canvas) {
       this.current += step;
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -155,7 +152,7 @@ export default class App extends Vue {
     this.y = clientY;
   }
 
-  onMouseup(): void {
+  onMouseUp(): void {
     this.isMouseDown = false;
 
     this.base64 = (this.canvas as HTMLCanvasElement).toDataURL();
