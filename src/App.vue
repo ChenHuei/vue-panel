@@ -53,7 +53,7 @@ export default class App extends Vue {
   context: CanvasRenderingContext2D | null = null;
 
   get isDisabledSave(): boolean {
-    return this.history.length === 0;
+    return this.history.length === 0 || this.current === 0;
   }
 
   get isDisabledUndo(): boolean {

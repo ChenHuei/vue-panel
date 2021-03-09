@@ -45,6 +45,7 @@ export default class HeaderItem extends Vue {
   &.disabled {
     opacity: 0.4;
     cursor: not-allowed !important;
+    pointer-events: none;
 
     &:hover {
       opacity: 0.4;
